@@ -1,1 +1,22 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "Archivo", sans-serif;
+  --font-display: "Archivo Black", sans-serif;
+  --font-mono: "Space Mono", monospace;
+
+  --color-purple:#6D5180;
+  --color-maroon:#4C0101;
+  --color-orange:#FA6002;
+  --color-yellow:#FCDD57;
+  --color-terracotta:#9A4E4F;
+  --color-paper:#FFFDF7;
+  --color-paper-2:#F7F1E4;
+  --color-ink:#221417;
+  --color-ink-soft:#4E3E42;
+
+  --shadow-hard: 4px 4px 0 var(--color-ink);
+  --shadow-hard-purple: 4px 4px 0 var(--color-purple);
+
+  --container-maxw: 1200px;
+}
