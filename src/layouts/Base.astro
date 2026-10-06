@@ -50,9 +50,9 @@ const { title, description = "PLACEHOLDER" } = Astro.props;
 
   <body class="bg-paper text-ink font-sans">
     <Navbar />
-
-    <slot />
-
+    <main>
+      <slot />
+    </main>
     <Footer />
   </body>
 </html>
