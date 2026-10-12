@@ -1,0 +1,36 @@
+---
+const links = [
+  { href: "#inicio", label: "Início" },
+  { href: "#quem-somos", label: "Quem Somos" },
+  { href: "#projetos", label: "Projetos" },
+  { href: "#equipe", label: "Equipe" },
+  { href: "#contato", label: "Contato" },
+];
+---
+
+<footer class="w-full bg-ink mt-17.5 text-paper-3 pt-11 px-6">
+  <div class="flex flex-col">
+    <div class="flex justify-between items-center">
+      <a href="#inicio" class="flex gap-2 font-display items-center">
+        <h2 class="flex items-center justify-center text-ink bg-orange p-1 w-9 h-9 -rotate-6 text-[13px] rounded-[10px]">
+          PET
+        </h2>
+        <h2 class="text-white">Letras</h2>
+      </a>
+      <div class="flex gap-4 justify-between items-center">
+        {links.map((link) => (
+          <a
+            href={link.href}
+            data-section={link.href.slice(1)}
+            class="text-sm hover:text-yellow transition-colors"
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+    <div class="border-t border-ink-soft mt-6.5 py-5 px-2 text-[.78rem]">
+      <p class="text-[#A99D9D]">© 2026 PET Letras — FELCS/UFRN · Programa de Educação Tutorial</p>
+    </div>
+  </div>
+</footer>
