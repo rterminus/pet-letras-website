@@ -1,11 +1,72 @@
 ---
+let pathname = Astro.url.pathname;
+if (pathname.length > 1 && pathname.endsWith("/")) {
+  pathname = pathname.slice(0, -1);
+}
+
+const links = [
+  { href: "#inicio", label: "Início" },
+  { href: "#quem-somos", label: "Quem Somos" },
+  { href: "#projetos", label: "Projetos" },
+  { href: "#equipe", label: "Equipe" },
+  { href: "#contato", label: "Contato" },
+];
 ---
 
 <nav class="sticky top-0 z-40 h-20 w-full px-6 py-5 transition-colors duration-300">
-  <div class="rounded-full bg-ink text-paper mx-auto flex h-full max-w-maxw items-center justify-between p-6">
-    <div class="flex gap-2">
-      <h2 class="text-ink bg-orange -rotate-6">PET</h2>
+  <div class="rounded-full bg-ink text-paper mx-auto flex h-full max-w-maxw items-center justify-between px-3 py-7 shadow-lg gap-3.5">
+    <a href="#inicio" class="flex gap-2 font-display items-center">
+      <h2 class="flex items-center justify-center text-ink bg-orange p-1 w-9 h-9 -rotate-6 text-[13px] rounded-[10px]">
+        PET
+      </h2>
       <h2>Letras</h2>
+    </a>
+    <div
+      id="navLinks"
+      class="flex gap-6 justify-between items-center text-sm font-bold text-paper-3"
+    >
+      {links.map((link) => (
+        <a
+          href={link.href}
+          data-section={link.href.slice(1)}
+          class="nav-link transition-colors"
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+    <div class="flex items-center">
+      <a
+        href="#contato"
+        class="bg-yellow text-ink text-[13.5px] font-extrabold px-3.5 py-2 rounded-full"
+      >
+        Fale com a gente
+      </a>
     </div>
   </div>
 </nav>
+
+<script>
+  const sections = document.querySelectorAll("main section[id]");
+  const links = document.querySelectorAll(".nav-link");
+
+  const setActive = () => {
+    let current = sections[0]?.id;
+    const pos = window.scrollY + 140;
+    sections.forEach((sec) => {
+      if (pos >= (sec as HTMLElement).offsetTop) current = sec.id;
+    });
+    links.forEach((l) => {
+      const isActive = l.getAttribute("data-section") === current;
+      l.classList.toggle("text-ink", isActive);
+      l.classList.toggle("bg-yellow", isActive);
+      l.classList.toggle("px-3", isActive);
+      l.classList.toggle("py-2", isActive);
+      l.classList.toggle("rounded-full", isActive);
+      l.classList.toggle("hover:text-paper", !isActive);
+    });
+  };
+
+  document.addEventListener("scroll", setActive, { passive: true });
+  setActive();
+</script>
