@@ -1,0 +1,87 @@
+---
+// as tags que ficam em baixo dos botes do hero
+const tags = ["ENSINO", "PESQUISA", "EXTENSÃO"];
+
+
+// Base compartilhada dos botões: só a cor e a sombra mudam
+const btn =
+  "inline-flex items-center gap-2 rounded-xl border-[2.5px] border-ink px-6 py-4 text-base font-extrabold transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5";
+---
+
+<section id="inicio" class="overflow-x-clip pt-24 pb-10 sm:pt-16 sm:pb-14">
+  <div
+    class="mx-auto flex max-w-[75rem] flex-col-reverse gap-10 px-6 lg:flex-row lg:items-center"
+  >
+    <!-- Collage -->
+    <!-- Foto em moldura inclinada -->
+    <div
+      class="relative hidden grid h-80 w-full max-w-md place-items-center self-center sm:h-[26rem] lg:max-w-none lg:flex-[1_1_24rem] lg:self-auto lg:block"
+    >
+
+      <!-- Moldura da foto -->
+      <div
+        class="relative aspect-square h-[95%] -rotate-6 overflow-hidden rounded-[2.5rem] border-[2.5px] border-ink bg-paper-2 shadow-[8px_8px_0_var(--color-ink)] motion-safe:animate-flutuar"
+      >
+        <!-- Imagem Placeholder -->
+        <div class="grid h-full w-full place-items-center text-ink-soft">
+          <span class="material-symbols-outlined !text-7xl">image</span> 
+          <!--  <img src="src/assets/petletras.jpg" alt="..." class="h-full w-full object-cover"/> -->
+        </div>
+      </div>
+
+      <img
+        src="/assets/figura-estrela.png"
+        alt=""
+        aria-hidden="true"
+        class="absolute -top-[2%] right-[2%] w-20 rotate-[8deg] drop-shadow-[0_8px_12px_rgba(34,20,23,.25)] sm:w-[6.5rem]"
+      />
+    </div>
+
+    <!-- Texto -->
+    <div class="lg:flex-[1_1_28rem]">
+      <span
+        class="mb-5 inline-flex -rotate-2 items-center gap-2 rounded-md bg-ink px-3.5 py-2 font-mono text-xs font-bold text-yellow"
+      >
+        PET · FELCS · UFRN
+      </span>
+
+      <h1
+        class="font-display text-[clamp(2.3rem,5vw,3.4rem)] leading-[1.02] tracking-[-0.01em] text-ink"
+      >
+        Letras, pesquisa e
+        <mark class="box-decoration-clone bg-[linear-gradient(to_top,transparent_15%,var(--color-yellow)_15%,var(--color-yellow)_83%,transparent_80%)] bg-transparent px-1 text-ink">antirracismo</mark> colados na prática.
+      </h1>
+
+      <p class="mt-6 mb-8 max-w-[48ch] text-[1.12rem] leading-relaxed text-ink-soft">
+        O PET Letras é um grupo de ensino, pesquisa e extensão da FELCS/UFRN. Formamos
+        professoras e professores comprometidos com uma sala de aula plural, crítica e
+        antirracista — um projeto sempre em construção coletiva.
+      </p>
+
+      <div class="mb-8 flex flex-wrap gap-3.5">
+        <a
+          href="#quem-somos"
+          class:list={[btn, "bg-orange text-paper shadow-[4px_4px_0_var(--color-ink)]"]}
+        >
+          Quem somos
+        </a>
+        <a
+          href="#projetos"
+          class:list={[btn, "bg-paper text-ink shadow-[4px_4px_0_var(--color-purple)]"]}
+        >
+          Conheça os projetos
+        </a>
+      </div>
+
+      <div class="flex flex-wrap gap-2">
+        {
+          tags.map((t) => (
+            <span class="rounded-md border-[1.5px] border-ink bg-paper-2 px-3 py-1.5 font-mono text-xs font-bold">
+              {t}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

@@ -19,4 +19,16 @@
   --shadow-hard-purple: 4px 4px 0 var(--color-purple);
 
   --container-maxw: 1200px;
+  
+  --animate-flutuar: flutuar 6s ease-in-out infinite;
+
+  @keyframes flutuar {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-0.9rem);
+    }
+  }
 }

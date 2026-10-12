@@ -1,0 +1,138 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Membro {
+  nome: string;
+  papel: string;
+  desc: string;
+  cor: string;
+  rot: string;
+  foto?: ImageMetadata;
+}
+
+const equipe: Membro[] = [
+  {
+    nome: "Nome do(a) Tutor(a)",
+    papel: "TUTORA(O)",
+    desc: "Orientação acadêmica do grupo.",
+    cor: "bg-maroon",
+    rot: "-rotate-[4deg]",
+    // foto: placeholder
+  },
+  {
+    nome: "Bolsista PET",
+    papel: "EXTENSÃO",
+    desc: "Atua nos projetos de extensão.",
+    cor: "bg-orange",
+    rot: "rotate-[3deg]",
+    // foto: placeholder
+  },
+  {
+    nome: "Bolsista PET",
+    papel: "PESQUISA",
+    desc: "Atua em pesquisa e formação.",
+    cor: "bg-purple",
+    rot: "-rotate-[2deg]",
+    // foto: placeholder
+  },
+  {
+    nome: "Bolsista PET",
+    papel: "MÍDIA",
+    desc: "Atua em produção de conteúdo.",
+    cor: "bg-terracotta",
+    rot: "rotate-[5deg]",
+    // foto: placeholder
+  },
+  {
+    nome: "Bolsista PET",
+    papel: "EVENTOS",
+    desc: "Atua em eventos e Rede PET.",
+    cor: "bg-maroon",
+    rot: "-rotate-[3deg]",
+    // foto: placeholder
+  },
+  {
+    nome: "Bolsista PET",
+    papel: "ENSINO",
+    desc: "Atua em tutoria de pares.",
+    cor: "bg-orange",
+    rot: "rotate-[2deg]",
+    // foto: placeholder
+  },
+];
+
+// "Maria Souza" -> "MS"
+const iniciais = (nome: string) =>
+  nome
+    .split(" ")
+    .filter(Boolean)
+    .map((parte) => parte[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+---
+
+<section id="equipe" class="overflow-x-clip py-12 bg-ink sm:py-[4.5rem]">
+  <div class="mx-auto max-w-[75rem] px-6">
+    <!-- Cabeçalho da seção -->
+    <div class="mb-10 max-w-[40rem]">
+      <span class="mb-2.5 inline-block font-mono text-xs font-bold text-orange">
+        // equipe
+      </span>
+      <h2
+        class="font-display text-[clamp(1.9rem,3.6vw,2.5rem)] leading-[1.02] text-paper"
+      >
+        Vem conhecer nossa equipe
+      </h2>
+      <p class="mt-3.5 text-base leading-relaxed text-paper/80">
+        Tutoria e bolsistas em dedicação conjunta ao PET Letras.
+      </p>
+    </div>
+
+    <!-- Mural -->
+    <div class="overflow-hidden rounded-3xl bg-paper-2 px-4 py-10 sm:px-8 sm:py-11">
+        <!-- setei o limite pra 4 por linha pois acredito que fica melhor assim -->
+      <ul class="mx-auto flex max-w-[48.5rem] flex flex-wrap justify-center gap-4 sm:gap-6">
+        {
+          equipe.map((m) => (
+            <li
+              class:list={[
+                "relative w-[calc(50%-0.5rem)] rounded-[0.625rem] bg-paper px-3 pt-5 pb-4 text-center shadow-[0_10px_18px_rgba(34,20,23,.16)] sm:w-44",
+                "before:absolute before:-top-1.5 before:left-1/2 before:size-3.5 before:-translate-x-1/2 before:rounded-full before:bg-orange before:shadow-[0_2px_3px_rgba(0,0,0,.3)]",
+                "motion-safe:transition-transform hover:z-10 hover:rotate-0 hover:scale-105",
+                m.rot,
+              ]}
+            >
+              {m.foto ? (
+                <Image
+                  src={m.foto}
+                  alt={`Foto de ${m.nome}`}
+                  width={128}
+                  height={128}
+                  class="mx-auto mb-3 size-16 rounded-full object-cover"
+                />
+              ) : (
+                <div
+                  aria-hidden="true"
+                  class:list={[
+                    "mx-auto mb-3 grid size-16 place-items-center rounded-full font-display text-lg text-paper",
+                    m.cor,
+                  ]}
+                >
+                  {iniciais(m.nome)}
+                </div>
+              )}
+
+              <h3 class="text-sm font-extrabold leading-tight">{m.nome}</h3>
+              <p class="mt-1.5 mb-2 font-mono text-[0.65rem] font-bold text-orange">
+                {m.papel}
+              </p>
+              <p class="text-xs leading-relaxed">{m.desc}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

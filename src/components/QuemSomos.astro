@@ -1,0 +1,79 @@
+---
+// Cada card guarda o estilo completo (cor + rotação) escrito por inteiro,
+// porque o Tailwind só gera classes que aparecem inteiras no código.
+const valores = [
+  {
+    titulo: "Educação antirracista",
+    texto: "Autoras e autores negros no centro do currículo.",
+    estilo: "bg-paper text-ink -rotate-2",
+  },
+  {
+    titulo: "Letramento crítico",
+    texto: "Ler e escrever como formas de ler o mundo.",
+    estilo: "bg-yellow text-ink rotate-[1.5deg]",
+  },
+  {
+    titulo: "Extensão viva",
+    texto: "Oficinas abertas à comunidade e ao público externo.",
+    estilo: "bg-terracotta text-paper -rotate-1",
+  },
+];
+---
+
+<section id="quem-somos" class="overflow-x-clip bg-ink py-12 sm:py-[4.5rem]">
+  <div class="mx-auto max-w-[75rem] px-6">
+    <!-- Cabeçalho da seção -->
+    <div class="mb-10 max-w-[40rem]">
+      <span class="mb-2.5 inline-block font-mono text-xs font-bold text-orange">
+        // quem somos
+      </span>
+      <h2
+        class="font-display text-[clamp(1.9rem,3.6vw,2.5rem)] leading-[1.02] text-paper"
+      >
+        Um grupo, várias vozes
+      </h2>
+    </div>
+
+    <!-- Duas colunas no desktop, empilhadas no celular -->
+    <div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-11">
+      <!-- Texto + citação -->
+      <div class="min-w-0 lg:flex-1">
+        <p class="mb-4 text-base leading-relaxed text-paper/80">
+          O Programa de Educação Tutorial (PET) Letras reúne estudantes de graduação
+          da Faculdade de Letras e Ciências Sociais (FELCS) da UFRN, sob orientação de
+          uma professora tutora. Juntos, desenvolvemos atividades de ensino, pesquisa
+          e extensão que aproximam a formação em Letras da escola pública e da
+          comunidade.
+        </p>
+        <p class="mb-4 text-base leading-relaxed text-paper/80">
+          Trabalhamos para que a diversidade de vozes, corpos e culturas que compõem a
+          linguagem — com destaque para a produção literária e intelectual negra —
+          ocupe o centro da formação docente.
+        </p>
+
+        <figure class="mt-6 rotate-1 rounded-2xl bg-purple p-6">
+          <img src="/assets/figura-aspas.png" alt="" class="mb-2.5 w-10" />
+          <blockquote class="text-[1.05rem] font-semibold leading-relaxed text-paper">
+            Ensinar Letras é também ensinar a reconhecer de quem são as vozes que
+            faltam nos livros.
+          </blockquote>
+          <figcaption class="mt-3 text-sm font-bold text-yellow">
+            — Equipe PET Letras
+          </figcaption>
+        </figure>
+      </div>
+
+      <!-- Cards de valores -->
+      <div class="grid gap-4 sm:grid-cols-3 lg:flex-1">
+        {
+          valores.map((v) => (
+            <div class:list={["rounded-2xl p-5", v.estilo]}>
+              <h3 class="mb-2 text-base font-extrabold">{v.titulo}</h3>
+              <p class="text-sm opacity-90">{v.texto}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
