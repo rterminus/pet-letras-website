@@ -23,7 +23,7 @@ const links = [
     </a>
     <div
       id="navLinks"
-      class="flex gap-6 justify-between items-center text-sm font-bold text-paper-3"
+      class="hidden md:flex gap-6 justify-between items-center text-sm font-bold text-paper-3"
     >
       {links.map((link) => (
         <a
@@ -35,14 +35,42 @@ const links = [
         </a>
       ))}
     </div>
+    <div
+      id="navLinksMobile"
+      data-open="false"
+      class="md:hidden fixed inset-x-4 top-21 bg-ink rounded-2xl text-sm font-bold p-2 flex flex-col items-start gap-1 w-fit ml-auto
+             -translate-y-[140%] transition-transform duration-200 ease-out
+             data-[open=true]:translate-y-0"
+    >
+      {links.map((link) => (
+        <a
+          href={link.href}
+          data-section={link.href.slice(1)}
+          class="nav-link transition-colors px-4 py-3 rounded-xl"
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
     <div class="flex items-center">
       <a
         href="#contato"
-        class="bg-yellow text-ink text-[13.5px] font-extrabold px-3.5 py-2 rounded-full"
+        class="hidden md:flex bg-yellow text-ink text-[13.5px] font-extrabold px-3.5 py-2 rounded-full"
       >
         Fale com a gente
       </a>
     </div>
+    <button
+      id="navToggle"
+      class="md:hidden flex flex-col gap-1 p-2 hover:cursor-pointer"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+      aria-controls="navLinksMobile"
+    >
+      <span class="block w-5 h-0.5 bg-paper"></span>
+      <span class="block w-5 h-0.5 bg-paper"></span>
+      <span class="block w-5 h-0.5 bg-paper"></span>
+    </button>
   </div>
 </nav>
 
@@ -69,4 +97,23 @@ const links = [
 
   document.addEventListener("scroll", setActive, { passive: true });
   setActive();
+</script>
+<script>
+  const toggle = document.getElementById("navToggle");
+  const mobileMenu = document.getElementById("navLinksMobile");
+
+  toggle?.addEventListener("click", () => {
+    const isOpen = toggle.getAttribute("data-open") === "true";
+    toggle.setAttribute("data-open", String(!isOpen));
+    mobileMenu?.setAttribute("data-open", String(!isOpen));
+    toggle.setAttribute("aria-expanded", String(!isOpen));
+  });
+
+  mobileMenu?.querySelectorAll(".nav-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      toggle?.setAttribute("data-open", "false");
+      mobileMenu.setAttribute("data-open", "false");
+      toggle?.setAttribute("aria-expanded", "false");
+    });
+  });
 </script>
