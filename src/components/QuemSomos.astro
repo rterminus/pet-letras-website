@@ -3,19 +3,19 @@
 // porque o Tailwind só gera classes que aparecem inteiras no código.
 const valores = [
   {
-    titulo: "Educação antirracista",
-    texto: "Autoras e autores negros no centro do currículo.",
-    estilo: "bg-paper text-ink -rotate-2",
+    titulo: "1",
+    texto: "Conscientizar a população sobre sobre a importância de uma cultura antirracista ",
+    estilo: "bg-paper text-ink text-justify -rotate-2",
   },
   {
-    titulo: "Letramento crítico",
-    texto: "Ler e escrever como formas de ler o mundo.",
-    estilo: "bg-yellow text-ink rotate-[1.5deg]",
+    titulo: "2",
+    texto: "Corroborar para diminuir o racismo estrutural",
+    estilo: "bg-yellow text-ink text-justify rotate-[1.5deg]",
   },
   {
-    titulo: "Extensão viva",
-    texto: "Oficinas abertas à comunidade e ao público externo.",
-    estilo: "bg-terracotta text-paper -rotate-1",
+    titulo: "3",
+    texto: "Contribuir para recuar o número de violências pautadas por questões étnico-raciais. ",
+    estilo: "bg-terracotta text-paper text-justify -rotate-1",
   },
 ];
 ---
@@ -38,27 +38,27 @@ const valores = [
     <div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-11">
       <!-- Texto + citação -->
       <div class="min-w-0 lg:flex-1">
-        <p class="mb-4 text-base leading-relaxed text-paper/80">
-          O Programa de Educação Tutorial (PET) Letras reúne estudantes de graduação
-          da Faculdade de Letras e Ciências Sociais (FELCS) da UFRN, sob orientação de
-          uma professora tutora. Juntos, desenvolvemos atividades de ensino, pesquisa
-          e extensão que aproximam a formação em Letras da escola pública e da
+        <p class="mb-4 text-base leading-relaxed text-paper/80 text-justify">
+          O Programa de Educação Tutorial (PET) Letras reúne estudantes de
+          graduação dos cursos de Letras da FELCS, sob orientação de um
+          professor tutor. Juntos, desenvolvemos atividades de ensino, pesquisa
+          e extensão que aproximam a formação em Letras a escola e a
           comunidade.
         </p>
-        <p class="mb-4 text-base leading-relaxed text-paper/80">
-          Trabalhamos para que a diversidade de vozes, corpos e culturas que compõem a
-          linguagem — com destaque para a produção literária e intelectual negra —
-          ocupe o centro da formação docente.
+        <p class="mb-4 text-base leading-relaxed text-paper/80 text-justify">
+          Trabalhamos para que a negritude alcance o centro da formação
+          docente, moldando mudanças na sociedade. 
         </p>
 
         <figure class="mt-6 rotate-1 rounded-2xl bg-purple p-6">
           <img src="/assets/figura-aspas.png" alt="" class="mb-2.5 w-10" />
-          <blockquote class="text-[1.05rem] font-semibold leading-relaxed text-paper">
-            Ensinar Letras é também ensinar a reconhecer de quem são as vozes que
-            faltam nos livros.
+          <blockquote class="text-[1.05rem] font-semibold leading-relaxed text-paper text-justify">
+            "A negritude é a afirmação de um povo que se recusa a desaparecer,
+            que se orgulha de sua ancestralidade e que luta por seu lugar de direito
+            na história." 
           </blockquote>
           <figcaption class="mt-3 text-sm font-bold text-yellow">
-            — Equipe PET Letras
+            — Abdias no Nascimento
           </figcaption>
         </figure>
       </div>
@@ -68,8 +68,8 @@ const valores = [
         {
           valores.map((v) => (
             <div class:list={["rounded-2xl p-5", v.estilo]}>
-              <h3 class="mb-2 text-base font-extrabold">{v.titulo}</h3>
-              <p class="text-sm opacity-90">{v.texto}</p>
+              <h3 class="mb-0 text-base font-extrabold text-center">{v.titulo}</h3>
+              <p class="text-sm font-semibold">{v.texto}</p>
             </div>
           ))
         }
