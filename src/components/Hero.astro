@@ -1,7 +1,46 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+import marromFoto from "../assets/marrom.jpeg";
+import laranjaFoto from "../assets/laranja.jpeg";
+import roxoFoto from "../assets/roxo.jpeg";
+
+interface Carta {
+  cor: string; // cor de fundo (aparece enquanto a foto não carrega)
+  pos: string; // posição, largura e rotação
+  foto?: ImageMetadata;
+  alt?: string;
+  objectPosition?: string; // enquadramento: object-top, object-center...
+}
+
+// A ordem define quem fica por cima (a última fica na frente)
+const cartas: Carta[] = [
+  {
+    cor: "bg-maroon",
+    pos: "left-0 top-[27%] w-[50%] -rotate-[9deg]",
+    foto: marromFoto,
+    alt: "",
+    objectPosition: "object-center",
+  },
+  {
+    cor: "bg-purple",
+    pos: "left-[25%] top-[0%] w-[50%] -rotate-1",
+    foto: roxoFoto,
+    alt: "",
+    objectPosition: "object-center",
+  },
+  {
+    cor: "bg-orange",
+    pos: "left-[50%] top-[24%] w-[50%] rotate-[8deg]",
+    foto: laranjaFoto,
+    alt: "",
+    objectPosition: "object-center",
+  },
+];
+
 // as tags que ficam em baixo dos botes do hero
 const tags = ["ENSINO", "PESQUISA", "EXTENSÃO"];
-
 
 // Base compartilhada dos botões: só a cor e a sombra mudam
 const btn =
@@ -10,35 +49,52 @@ const btn =
 
 <section id="inicio" class="overflow-x-clip pt-24 pb-10 sm:pt-16 sm:pb-14">
   <div
-    class="mx-auto flex max-w-[75rem] flex-col-reverse gap-10 px-6 lg:flex-row lg:items-center"
+    class="mx-auto flex max-w-[75rem] flex-col-reverse gap-10 px-6 lg:flex-row lg:items-center lg:gap-12"
   >
-    <!-- Collage -->
-    <!-- Foto em moldura inclinada -->
-    <div
-      class="relative hidden grid h-80 w-full max-w-md place-items-center self-center sm:h-[26rem] lg:max-w-none lg:flex-[1_1_24rem] lg:self-auto lg:block"
-    >
+    <!-- Collage de cartas -->
+    <div class="hidden min-w-0 lg:block lg:flex-[1.5_1_30rem]">
+      <!-- Área com proporção fixa: tudo escala junto -->
+      <div class="relative mx-auto aspect-[20/21] w-full max-w-[46rem]">
+        {
+          cartas.map((c) => (
+            <div
+              class:list={[
+                "absolute aspect-[23/30] overflow-hidden rounded-[14px] shadow-[0_18px_30px_rgba(34,20,23,.22)] will-change-transform [backface-visibility:hidden]",
+                "motion-safe:transition-all motion-safe:duration-300 hover:z-20 hover:rotate-0 hover:scale-105 hover:shadow-[0_26px_44px_rgba(34,20,23,.35)]",
+                c.cor,
+                c.pos,
+              ]}
+            >
+              {c.foto && (
+                <Image
+                  src={c.foto}
+                  alt={c.alt ?? ""}
+                  widths={[360, 540, 720, 900]}
+                  sizes="(min-width: 1024px) 26vw, 1px"
+                  quality="max"
+                  loading="eager"
+                  class:list={[
+                    "h-full w-full object-cover",
+                    c.objectPosition || "object-center",
+                  ]}
+                />
+              )}
+            </div>
+          ))
+        }
 
-      <!-- Moldura da foto -->
-      <div
-        class="relative aspect-square h-[95%] -rotate-6 overflow-hidden rounded-[2.5rem] border-[2.5px] border-ink bg-paper-2 shadow-[8px_8px_0_var(--color-ink)] motion-safe:animate-flutuar"
-      >
-        <!-- Imagem Placeholder -->
-        <div class="grid h-full w-full place-items-center text-ink-soft">
-          <span class="material-symbols-outlined !text-7xl">image</span> 
-          <!--  <img src="src/assets/petletras.jpg" alt="..." class="h-full w-full object-cover"/> -->
-        </div>
+        <!-- Estrela -->
+        <img
+          src="/assets/figura-estrela.png"
+          alt=""
+          aria-hidden="true"
+          class="pointer-events-none absolute -top-[2%] right-[2%] z-30 w-20 rotate-[8deg] drop-shadow-[0_8px_12px_rgba(34,20,23,.25)] sm:w-[6.5rem]"
+        />
       </div>
-
-      <img
-        src="/assets/figura-estrela.png"
-        alt=""
-        aria-hidden="true"
-        class="absolute -top-[2%] right-[2%] w-20 rotate-[8deg] drop-shadow-[0_8px_12px_rgba(34,20,23,.25)] sm:w-[6.5rem]"
-      />
     </div>
 
     <!-- Texto -->
-    <div class="lg:flex-[1_1_28rem]">
+    <div class="min-w-0 lg:flex-[1_1_26rem]">
       <span
         class="mb-5 inline-flex -rotate-2 items-center gap-2 rounded-md bg-ink px-3.5 py-2 font-mono text-xs font-bold text-yellow"
       >
@@ -46,10 +102,9 @@ const btn =
       </span>
 
       <h1
-        class="font-display text-[clamp(2.3rem,5vw,3.4rem)] leading-[1.02] tracking-[-0.01em] text-ink"
+        class="font-display text-[clamp(1.6rem,8vw,3.4rem)] leading-[1.02] tracking-[-0.01em] text-ink [overflow-wrap:anywhere]"
       >
-        EQUIDADE, INTERDISCIPLINARIDADE E 
-        <mark class="box-decoration-clone bg-[linear-gradient(to_top,transparent_15%,var(--color-yellow)_15%,var(--color-yellow)_83%,transparent_80%)] bg-transparent px-1 text-ink">DECOLONIALIDADE </mark>
+        EQUIDADE, INTER&shy;DISCI&shy;PLINA&shy;RIDADE E&nbsp;<mark class="box-decoration-clone bg-[linear-gradient(to_top,transparent_15%,var(--color-yellow)_15%,var(--color-yellow)_83%,transparent_80%)] bg-transparent px-1 text-ink">DECOLONIA&shy;LIDADE</mark>
       </h1>
 
       <p class="mt-6 mb-8 max-w-[48ch] text-[1.12rem] text-justify leading-relaxed text-ink-soft">
